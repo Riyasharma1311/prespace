@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gallery App — All Screens Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#080B1E; --surface:#0C1030; --card:#111840; --card-alt:#0F1535;
+    --border-d:#1A2460; --border-p:#3B52CC;
+    --blue1:#2563EB; --blue2:#1E40AF; --teal:#00E5CC; --accent:#3B5BFF;
+    --lime:#B8FF57; --red:#EF4444;
+    --text-w:#FFFFFF; --text-s:#8B9CC8; --text-d:#4A5880;
+  }
+  body{background:#0a0a1a;font-family:'Inter',sans-serif;color:var(--text-w);min-height:100vh;padding:40px 20px;}
+  h1{text-align:center;font-size:13px;font-weight:700;color:var(--text-s);letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;}
+  .grid{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;max-width:1400px;margin:0 auto;}
+
+  /* Phone frame */
+  .phone{width:375px;flex-shrink:0;}
+  .phone-label{text-align:center;font-size:11px;color:var(--text-d);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;font-weight:600;}
+  .frame{width:375px;height:812px;background:var(--bg);border-radius:48px;overflow:hidden;border:2px solid #1a2460;box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px #0d1240,inset 0 1px 0 rgba(255,255,255,0.05);position:relative;}
+  .screen{width:100%;height:100%;overflow:hidden;position:relative;}
+
+  /* Shared utilities */
+  .grad-teal{background:linear-gradient(135deg,var(--teal),var(--blue1));}
+  .grad-blue{background:linear-gradient(135deg,var(--blue1),var(--accent));}
+  .accent-bar{width:32px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--blue1));margin-bottom:10px;}
+  .card{background:var(--card);border-radius:16px;border:1px solid var(--border-d);}
+  .pill{border-radius:99px;}
+  .flex{display:flex;align-items:center;}
+  .gap-8{gap:8px;}
+  .gap-12{gap:12px;}
+
+  /* Status bar */
+  .status-bar{display:flex;justify-content:space-between;padding:14px 28px 0;font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);position:relative;z-index:10;}
+  .status-icons{display:flex;gap:6px;align-items:center;}
+
+  /* Floating nav */
+  .floating-nav{position:absolute;bottom:20px;left:20px;right:20px;height:60px;background:rgba(17,24,64,0.92);border-radius:32px;border:1px solid var(--border-d);display:flex;align-items:center;justify-content:space-around;z-index:100;backdrop-filter:blur(24px);box-shadow:0 4px 20px rgba(37,99,235,0.12);}
+  .nav-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;}
+  .nav-item.active{background:linear-gradient(135deg,var(--blue1),var(--accent));color:#fff;box-shadow:0 2px 12px rgba(37,99,235,0.35);}
+  .nav-item svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;}
+  .nav-item:not(.active){color:var(--text-d);}
+
+  /* ── SPLASH ─────────────────────────────── */
+  .splash{background:linear-gradient(180deg,#0B0D2A 0%,#0E1245 50%,#1A1060 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;position:relative;}
+  .splash-dots{position:absolute;inset:0;opacity:.3;background-image:radial-gradient(circle,#1E2A6E 1px,transparent 1px);background-size:32px 32px;}
+  .splash-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.25),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+  .logo-ring{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--blue1),var(--accent));display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 0 40px rgba(37,99,235,.5);margin-bottom:20px;position:relative;z-index:1;}
+  .splash-title{font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.5px;position:relative;z-index:1;}
+  .splash-sub{font-size:13px;color:var(--text-s);margin-top:6px;position:relative;z-index:1;}
+  .splash-loader{position:absolute;bottom:80px;display:flex;gap:6px;}
+  .loader-dot{width:6px;height:6px;border-radius:50%;background:var(--border-p);}
+  .loader-dot.active{background:linear-gradient(135deg,var(--teal),var(--blue1));box-shadow:0 0 8px var(--teal);}
+
+  /* ── SUBSCRIPTION ─────────────────────────── */
+  .subscribe-bg{background:linear-gradient(180deg,#0B0D2A 0%,#0E1245 50%,#1A1060 100%);height:100%;overflow-y:auto;position:relative;}
+  .subscribe-dots{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(circle,#1E2A6E 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+  .sub-header{padding:52px 24px 20px;position:relative;z-index:1;}
+  .sub-title{font-size:26px;font-weight:800;letter-spacing:-0.5px;line-height:1.2;}
+  .sub-cards{display:flex;flex-direction:column;gap:12px;padding:0 16px;position:relative;z-index:1;}
+  .sub-card{background:#0D1240;border-radius:20px;border:1px solid var(--border-d);padding:16px;position:relative;}
+  .sub-card.popular{border-color:var(--border-p);box-shadow:0 0 24px rgba(37,99,235,.2);}
+  .sub-card-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;position:absolute;top:-14px;right:16px;border:2px solid #0D1240;}
+  .sub-price{font-size:22px;font-weight:800;color:#fff;}
+  .sub-price.lime{color:var(--lime);}
+  .sub-period{font-size:11px;color:var(--text-s);margin-left:4px;}
+  .sub-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;}
+  .sub-storage{font-size:11px;color:var(--text-s);}
+  .sub-badge{background:rgba(184,255,87,.12);border:1px solid rgba(184,255,87,.25);color:var(--lime);font-size:9px;font-weight:800;letter-spacing:.8px;padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:6px;}
+  .sub-btn{margin:16px;height:48px;background:linear-gradient(135deg,var(--blue1),var(--blue2));border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:700;width:calc(100% - 32px);cursor:pointer;box-shadow:0 4px 20px rgba(37,99,235,.4);}
+
+  /* ── REGISTER ─────────────────────────────── */
+  .register-bg{background:linear-gradient(180deg,#0B0D2A 0%,#0E1245 50%,#1A1060 100%);height:100%;overflow-y:auto;position:relative;}
+  .reg-dots{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(circle,#1E2A6E 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+  .reg-content{padding:52px 24px 24px;position:relative;z-index:1;}
+  .back-btn{width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border-d);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:14px;color:rgba(255,255,255,.7);}
+  .reg-title{font-size:26px;font-weight:800;letter-spacing:-0.5px;}
+  .reg-sub{font-size:13px;color:var(--text-s);margin-top:4px;margin-bottom:24px;}
+  .plan-badge{background:var(--card);border:1px solid rgba(59,82,204,.5);border-radius:12px;padding:10px 14px;display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;box-shadow:0 0 16px rgba(37,99,235,.12);}
+  .plan-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue1),var(--accent));display:flex;align-items:center;justify-content:center;font-size:12px;}
+  .plan-badge-text{font-size:13px;font-weight:600;color:#fff;}
+  .active-pill{background:rgba(184,255,87,.12);border:1px solid rgba(184,255,87,.28);color:var(--lime);font-size:9px;font-weight:800;letter-spacing:.8px;padding:2px 7px;border-radius:5px;}
+  .field-label{font-size:11px;font-weight:600;color:var(--text-s);letter-spacing:.4px;margin-bottom:7px;}
+  .dark-field{background:var(--card);border-radius:13px;border:1px solid var(--border-d);height:50px;display:flex;align-items:center;padding:0 14px;gap:10px;margin-bottom:16px;}
+  .dark-field.focused{border-color:rgba(59,82,204,.9);box-shadow:0 0 16px rgba(37,99,235,.2);}
+  .field-icon{font-size:16px;opacity:.6;}
+  .field-text{font-size:14px;color:var(--text-d);}
+  .field-text.value{color:rgba(255,255,255,.5);}
+  .reg-btn{height:52px;background:linear-gradient(135deg,var(--blue1),var(--blue2));border:none;border-radius:15px;color:#fff;font-size:15px;font-weight:700;width:100%;cursor:pointer;box-shadow:0 6px 20px rgba(37,99,235,.45);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
+  .signin-link{text-align:center;font-size:13px;color:var(--text-s);margin-top:16px;}
+  .signin-link span{color:var(--teal);font-weight:700;}
+
+  /* ── PHOTOS HOME ─────────────────────────────── */
+  .photos-bg{background:var(--bg);height:100%;overflow:hidden;position:relative;display:flex;flex-direction:column;}
+  .appbar{padding:52px 20px 8px;display:flex;align-items:flex-end;justify-content:space-between;}
+  .greeting-area{padding:0 20px 16px;}
+  .greeting-emoji{font-size:20px;}
+  .greeting-text{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.3px;}
+  .greeting-sub{font-size:12px;color:var(--text-s);margin-top:3px;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue1),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 0 10px rgba(37,99,235,.4);}
+  .memories-header{padding:0 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .section-title{font-size:15px;font-weight:700;color:#fff;}
+  .view-all{background:var(--card);border:1px solid var(--border-d);border-radius:12px;padding:3px 10px;font-size:11px;color:var(--teal);font-weight:600;}
+  .memories-scroll{padding:0 20px;display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;}
+  .memories-scroll::-webkit-scrollbar{display:none;}
+  .memory-card{width:145px;height:190px;border-radius:20px;flex-shrink:0;position:relative;overflow:hidden;border:1px solid rgba(26,36,96,.6);}
+  .mem-bg{position:absolute;inset:0;}
+  .mem-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.75));}
+  .mem-play{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .mem-text{position:absolute;bottom:12px;left:10px;right:10px;}
+  .mem-title{font-size:12px;font-weight:700;color:#fff;line-height:1.3;}
+  .mem-sub{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;}
+  .mem-ghost{position:absolute;right:-10px;top:10px;font-size:70px;opacity:.07;}
+  .group-header{padding:0 20px;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .group-bar{width:3px;height:14px;border-radius:2px;background:linear-gradient(to bottom,var(--teal),var(--blue1));}
+  .group-label{font-size:13px;font-weight:600;color:var(--text-s);}
+  .group-count{font-size:11px;color:var(--text-d);margin-left:auto;}
+  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:0 3px;}
+  .photo-tile{aspect-ratio:1;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:22px;opacity:.85;}
+
+  /* ── SEARCH ─────────────────────────────── */
+  .search-bg{background:var(--bg);height:100%;display:flex;flex-direction:column;overflow:hidden;}
+  .search-header{padding:52px 20px 16px;}
+  .search-bar{margin:0 20px 20px;background:var(--card);border-radius:16px;border:1px solid var(--border-d);height:50px;display:flex;align-items:center;gap:10px;padding:0 16px;}
+  .search-icon{font-size:18px;opacity:.5;}
+  .search-placeholder{font-size:14px;color:var(--text-d);}
+  .browse-title{padding:0 20px;font-size:17px;font-weight:700;color:#fff;margin-bottom:14px;}
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px;overflow-y:auto;}
+  .cat-tile{background:var(--card);border-radius:14px;height:52px;display:flex;align-items:center;gap:10px;padding:0 14px;border:1px solid transparent;}
+  .cat-icon-wrap{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;}
+  .cat-label{font-size:12px;font-weight:600;color:#fff;}
+
+  /* ── LIBRARY ─────────────────────────────── */
+  .library-bg{background:var(--bg);height:100%;display:flex;flex-direction:column;overflow:hidden;}
+  .lib-header{padding:52px 20px 16px;}
+  .quick-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px;margin-bottom:24px;}
+  .quick-tile{background:var(--card);border-radius:16px;padding:14px;display:flex;align-items:center;gap:10px;}
+  .quick-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .quick-label{font-size:13px;font-weight:600;color:#fff;}
+  .quick-count{font-size:11px;color:var(--text-s);}
+  .albums-header{padding:0 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .album-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px;overflow-y:auto;}
+  .album-card{border-radius:18px;overflow:hidden;border:1px solid var(--border-d);aspect-ratio:.85;position:relative;}
+  .album-bg{position:absolute;inset:0;}
+  .album-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.72));}
+  .album-ghost{position:absolute;right:-5px;top:10px;font-size:60px;opacity:.1;}
+  .album-center-icon{position:absolute;top:28px;left:0;right:0;text-align:center;font-size:36px;opacity:.5;}
+  .album-text{position:absolute;bottom:12px;left:12px;right:8px;}
+  .album-name{font-size:13px;font-weight:700;color:#fff;}
+  .album-count{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;}
+
+  /* ── UTILITIES ─────────────────────────────── */
+  .utils-bg{background:var(--bg);height:100%;display:flex;flex-direction:column;overflow:hidden;}
+  .utils-header{padding:52px 20px 16px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .storage-card{margin:0 20px 20px;background:linear-gradient(135deg,#0D1A50,#1A1060);border-radius:22px;border:1px solid rgba(59,82,204,.5);padding:22px;box-shadow:0 0 24px rgba(37,99,235,.18);}
+  .storage-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .storage-icon{width:36px;height:36px;border-radius:50%;background:rgba(37,99,235,.2);display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .storage-plan{font-size:14px;font-weight:700;color:#fff;}
+  .storage-sub-label{font-size:11px;color:var(--text-s);}
+  .storage-gb-pill{background:rgba(184,255,87,.12);border:1px solid rgba(184,255,87,.28);color:var(--lime);font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;}
+  .storage-bar-track{height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:8px;}
+  .storage-bar-fill{height:100%;width:38%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--blue1));box-shadow:0 0 8px rgba(0,229,204,.5);}
+  .storage-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--text-s);margin-bottom:16px;}
+  .manage-btn{height:36px;background:linear-gradient(135deg,var(--blue1),var(--blue2));border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:600;padding:0 18px;cursor:pointer;}
+  .tools-section{padding:0 20px;}
+  .tools-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .tool-item{background:var(--card);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .tool-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .tool-title{font-size:13px;font-weight:600;color:#fff;}
+  .tool-sub{font-size:11px;color:var(--text-s);margin-top:2px;}
+
+  /* ── PHOTO DETAIL ─────────────────────────────── */
+  .detail-bg{height:100%;position:relative;overflow:hidden;}
+  .detail-photo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:110px;opacity:.22;}
+  .detail-top{position:absolute;top:0;left:0;right:0;background:linear-gradient(to bottom,rgba(0,0,0,.65),transparent);padding:52px 16px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .glass-btn{width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:16px;backdrop-filter:blur(16px);}
+  .detail-bottom{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent);}
+  .info-pill{margin:0 20px 10px;background:rgba(255,255,255,.07);border-radius:12px;border:1px solid rgba(255,255,255,.1);padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-s);backdrop-filter:blur(16px);}
+  .action-pill{margin:0 20px 70px;background:rgba(17,24,64,.88);border-radius:22px;border:1px solid rgba(26,36,96,.8);padding:10px 0;display:flex;justify-content:space-around;backdrop-filter:blur(24px);box-shadow:0 4px 20px rgba(0,0,0,.3);}
+  .action-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px 12px;}
+  .action-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .action-label{font-size:9px;font-weight:600;}
+
+  /* Scrollbar hide */
+  .overflow-y{overflow-y:auto;}
+  .overflow-y::-webkit-scrollbar{display:none;}
+</style>
+</head>
+<body>
+<h1>🌙 Midnight Gallery — All Screens</h1>
+
+<div class="grid">
+
+  <!-- ── 1. SPLASH ───────────────── -->
+  <div class="phone">
+    <div class="phone-label">01 · Splash</div>
+    <div class="frame">
+      <div class="screen splash">
+        <div class="splash-dots"></div>
+        <div class="splash-glow"></div>
+        <div class="logo-ring">📷</div>
+        <div class="splash-title">Midnight Gallery</div>
+        <div class="splash-sub">Your memories, beautifully kept</div>
+        <div class="splash-loader">
+          <div class="loader-dot"></div>
+          <div class="loader-dot active"></div>
+          <div class="loader-dot active"></div>
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. SUBSCRIPTION ───────────── -->
+  <div class="phone">
+    <div class="phone-label">02 · Subscription</div>
+    <div class="frame">
+      <div class="screen overflow-y subscribe-bg">
+        <div class="subscribe-dots"></div>
+        <div class="status-bar" style="position:relative;z-index:2;">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="sub-header">
+          <div class="accent-bar"></div>
+          <div class="sub-title">Choose your<br/><span style="color:var(--teal)">storage plan</span></div>
+          <div style="font-size:13px;color:var(--text-s);margin-top:6px;">Start free · upgrade anytime</div>
+          <div style="display:flex;gap:8px;margin-top:16px;align-items:center;">
+            <div style="background:linear-gradient(135deg,var(--blue1),var(--accent));border-radius:99px;padding:4px;width:44px;height:24px;position:relative;">
+              <div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;right:4px;top:4px;"></div>
+            </div>
+            <span style="font-size:12px;color:var(--text-s);">Monthly</span>
+            <span style="font-size:12px;color:var(--text-s);margin-left:8px;">Annual</span>
+            <span style="background:rgba(184,255,87,.12);border:1px solid rgba(184,255,87,.28);color:var(--lime);font-size:9px;font-weight:800;padding:2px 6px;border-radius:5px;margin-left:2px;">-20%</span>
+          </div>
+        </div>
+        <div class="sub-cards">
+          <!-- Free -->
+          <div class="sub-card" style="padding:14px 16px 10px;">
+            <div class="sub-card-icon" style="background:linear-gradient(135deg,#374151,#1F2937);">🆓</div>
+            <div class="sub-name">Free</div>
+            <div class="sub-storage">5 GB storage</div>
+            <div style="display:flex;align-items:baseline;margin-top:8px;">
+              <div class="sub-price">$0</div><div class="sub-period">/month</div>
+            </div>
+          </div>
+          <!-- Basic -->
+          <div class="sub-card" style="padding:14px 16px 10px;">
+            <div class="sub-card-icon" style="background:linear-gradient(135deg,#1D4ED8,#1E40AF);">☁️</div>
+            <div class="sub-name">Basic</div>
+            <div class="sub-storage">15 GB storage</div>
+            <div style="display:flex;align-items:baseline;margin-top:8px;">
+              <div class="sub-price">$1.99</div><div class="sub-period">/month</div>
+            </div>
+          </div>
+          <!-- Standard — POPULAR -->
+          <div class="sub-card popular" style="padding:14px 16px 10px;">
+            <div class="sub-card-icon" style="background:linear-gradient(135deg,var(--blue1),var(--accent));">⭐</div>
+            <div class="sub-badge">MOST POPULAR</div>
+            <div class="sub-name">Standard</div>
+            <div class="sub-storage">50 GB storage</div>
+            <div style="display:flex;align-items:baseline;margin-top:8px;">
+              <div class="sub-price lime">$3.99</div><div class="sub-period">/month</div>
+            </div>
+          </div>
+        </div>
+        <button class="sub-btn">GET STARTED →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. REGISTER ───────────── -->
+  <div class="phone">
+    <div class="phone-label">03 · Register</div>
+    <div class="frame">
+      <div class="screen overflow-y register-bg">
+        <div class="reg-dots"></div>
+        <div class="status-bar" style="position:relative;z-index:2;">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="reg-content">
+          <div class="back-btn">‹</div>
+          <div class="accent-bar"></div>
+          <div class="reg-title">Create Account</div>
+          <div class="reg-sub">Set up your username and password</div>
+          <div class="plan-badge">
+            <div class="plan-icon">☁️</div>
+            <div class="plan-badge-text">Standard Plan · 50 GB</div>
+            <div class="active-pill">ACTIVE</div>
+          </div>
+          <div class="field-label">FULL NAME</div>
+          <div class="dark-field">
+            <div class="field-icon">👤</div>
+            <div class="field-text">e.g. Riya Sharma</div>
+          </div>
+          <div class="field-label">USERNAME</div>
+          <div class="dark-field focused">
+            <div class="field-icon">@</div>
+            <div class="field-text value">riya_sharma</div>
+          </div>
+          <div class="field-label">EMAIL ADDRESS</div>
+          <div class="dark-field">
+            <div class="field-icon">✉️</div>
+            <div class="field-text">you@example.com</div>
+          </div>
+          <div class="field-label">PASSWORD</div>
+          <div class="dark-field">
+            <div class="field-icon">🔒</div>
+            <div class="field-text">6+ characters</div>
+          </div>
+          <div class="field-label">CONFIRM PASSWORD</div>
+          <div class="dark-field">
+            <div class="field-icon">🔒</div>
+            <div class="field-text">Re-enter your password</div>
+          </div>
+          <button class="reg-btn">Create Account →</button>
+          <div class="signin-link">Already have an account? <span>Sign In</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. PHOTOS HOME ───────────── -->
+  <div class="phone">
+    <div class="phone-label">04 · Photos (Home)</div>
+    <div class="frame">
+      <div class="screen photos-bg">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="appbar">
+          <div></div>
+          <div class="avatar">RS</div>
+        </div>
+        <div class="greeting-area">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="greeting-emoji">🌙</span>
+            <span class="greeting-text">Good evening, Riya</span>
+          </div>
+          <div class="greeting-sub">247 photos backed up</div>
+        </div>
+        <!-- Memories -->
+        <div class="memories-header">
+          <span class="section-title">Memories</span>
+          <span class="view-all">View all</span>
+        </div>
+        <div class="memories-scroll">
+          <div class="memory-card">
+            <div class="mem-bg" style="background:radial-gradient(circle at top right,#1A3A6E,#111840);"></div>
+            <div class="mem-ghost">🏙️</div>
+            <div class="mem-overlay"></div>
+            <div class="mem-play">▶</div>
+            <div class="mem-text">
+              <div class="mem-title">3 Years Ago in Paris</div>
+              <div class="mem-sub">Jun 2022 · 24 photos</div>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="mem-bg" style="background:radial-gradient(circle at top right,#1E3A52,#111840);"></div>
+            <div class="mem-ghost">☀️</div>
+            <div class="mem-overlay"></div>
+            <div class="mem-play">▶</div>
+            <div class="mem-text">
+              <div class="mem-title">Summer Highlights</div>
+              <div class="mem-sub">Aug 2023 · 18 photos</div>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="mem-bg" style="background:radial-gradient(circle at top right,#1A3A2E,#111840);"></div>
+            <div class="mem-ghost">👨‍👩‍👧</div>
+            <div class="mem-overlay"></div>
+            <div class="mem-play">▶</div>
+            <div class="mem-text">
+              <div class="mem-title">Family Weekend</div>
+              <div class="mem-sub">Dec 2023 · 31 photos</div>
+            </div>
+          </div>
+        </div>
+        <!-- Group -->
+        <div class="group-header" style="margin-top:16px;">
+          <div class="group-bar"></div>
+          <span class="group-label">Today</span>
+          <span class="group-count">8 photos</span>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-tile" style="background:linear-gradient(135deg,#1D4ED8,#1E3A5F);">🌅</div>
+          <div class="photo-tile" style="background:linear-gradient(135deg,#065F46,#064E3B);">🌿</div>
+          <div class="photo-tile" style="background:linear-gradient(135deg,#7C2D12,#451A03);">🍂</div>
+          <div class="photo-tile" style="background:linear-gradient(135deg,#4C1D95,#2E1065);">🌌</div>
+          <div class="photo-tile" style="background:linear-gradient(135deg,#831843,#500724);">🌸</div>
+          <div class="photo-tile" style="background:linear-gradient(135deg,#1A3A52,#0C1836);">🌊</div>
+        </div>
+        <!-- Floating nav -->
+        <div class="floating-nav">
+          <div class="nav-item active">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+            Photos
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. SEARCH ───────────── -->
+  <div class="phone">
+    <div class="phone-label">05 · Search</div>
+    <div class="frame">
+      <div class="screen search-bg">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="search-header">
+          <div class="accent-bar"></div>
+          <div style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Search</div>
+        </div>
+        <div class="search-bar">
+          <div class="search-icon">🔍</div>
+          <div class="search-placeholder">Search your photos…</div>
+        </div>
+        <div class="browse-title">Browse</div>
+        <div class="cat-grid">
+          <div class="cat-tile" style="border-color:rgba(37,99,235,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(37,99,235,.15);">😊</div>
+            <span class="cat-label">People</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(5,150,105,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(5,150,105,.15);">🗺️</div>
+            <span class="cat-label">Places</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(217,119,6,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(217,119,6,.15);">📦</div>
+            <span class="cat-label">Things</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(220,38,38,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(220,38,38,.15);">🎬</div>
+            <span class="cat-label">Videos</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(124,58,237,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(124,58,237,.15);">🤳</div>
+            <span class="cat-label">Selfies</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(8,145,178,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(8,145,178,.15);">📄</div>
+            <span class="cat-label">Screenshots</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(225,29,72,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(225,29,72,.15);">❤️</div>
+            <span class="cat-label">Favourites</span>
+          </div>
+          <div class="cat-tile" style="border-color:rgba(0,229,204,.25);">
+            <div class="cat-icon-wrap" style="background:rgba(0,229,204,.15);">📁</div>
+            <span class="cat-label">Documents</span>
+          </div>
+        </div>
+        <div style="padding:16px 20px 4px;font-size:15px;font-weight:700;color:#fff;">Recent</div>
+        <div style="display:flex;gap:8px;padding:0 20px;overflow:hidden;">
+          <div style="width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#1D4ED8,#1e3a5f);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🌅</div>
+          <div style="width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#065F46,#064E3B);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🌿</div>
+          <div style="width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#7C2D12,#451A03);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🍂</div>
+          <div style="width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#4C1D95,#2E1065);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🌌</div>
+        </div>
+        <div class="floating-nav" style="bottom:20px;">
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+          </div>
+          <div class="nav-item active">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+            Search
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. LIBRARY ───────────── -->
+  <div class="phone">
+    <div class="phone-label">06 · Library</div>
+    <div class="frame">
+      <div class="screen library-bg">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="lib-header">
+          <div class="accent-bar"></div>
+          <div style="font-size:22px;font-weight:800;">Library</div>
+        </div>
+        <div class="quick-tiles">
+          <div class="quick-tile" style="border:1px solid rgba(225,29,72,.2);">
+            <div class="quick-icon" style="background:rgba(225,29,72,.12);">❤️</div>
+            <div><div class="quick-label">Favourites</div><div class="quick-count">24 items</div></div>
+          </div>
+          <div class="quick-tile" style="border:1px solid rgba(139,156,200,.2);">
+            <div class="quick-icon" style="background:rgba(139,156,200,.12);">📦</div>
+            <div><div class="quick-label">Archive</div><div class="quick-count">12 items</div></div>
+          </div>
+        </div>
+        <div class="albums-header">
+          <span style="font-size:17px;font-weight:700;color:#fff;">Albums</span>
+          <span style="font-size:13px;color:var(--teal);font-weight:600;">View all</span>
+        </div>
+        <div class="album-grid">
+          <div class="album-card">
+            <div class="album-bg" style="background:linear-gradient(160deg,#1D4ED8,#111840);"></div>
+            <div class="album-ghost">🌅</div>
+            <div class="album-center-icon">🌅</div>
+            <div class="album-overlay"></div>
+            <div class="album-text"><div class="album-name">Sunsets</div><div class="album-count">18 items</div></div>
+          </div>
+          <div class="album-card">
+            <div class="album-bg" style="background:linear-gradient(160deg,#065F46,#111840);"></div>
+            <div class="album-ghost">🌿</div>
+            <div class="album-center-icon">🌿</div>
+            <div class="album-overlay"></div>
+            <div class="album-text"><div class="album-name">Nature</div><div class="album-count">32 items</div></div>
+          </div>
+          <div class="album-card">
+            <div class="album-bg" style="background:linear-gradient(160deg,#7C2D12,#111840);"></div>
+            <div class="album-ghost">🏙️</div>
+            <div class="album-center-icon">🏙️</div>
+            <div class="album-overlay"></div>
+            <div class="album-text"><div class="album-name">Travel</div><div class="album-count">56 items</div></div>
+          </div>
+          <div class="album-card">
+            <div class="album-bg" style="background:linear-gradient(160deg,#4C1D95,#111840);"></div>
+            <div class="album-ghost">👨‍👩‍👧</div>
+            <div class="album-center-icon">👨‍👩‍👧</div>
+            <div class="album-overlay"></div>
+            <div class="album-text"><div class="album-name">Family</div><div class="album-count">44 items</div></div>
+          </div>
+        </div>
+        <div class="floating-nav" style="bottom:20px;">
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-item active">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Library
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. UTILITIES ───────────── -->
+  <div class="phone">
+    <div class="phone-label">07 · Utilities</div>
+    <div class="frame">
+      <div class="screen utils-bg">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+        </div>
+        <div class="utils-header">
+          <div>
+            <div class="accent-bar"></div>
+            <div style="font-size:22px;font-weight:800;">Utilities</div>
+          </div>
+          <div class="avatar">RS</div>
+        </div>
+        <div class="storage-card">
+          <div class="storage-header-row">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="storage-icon">☁️</div>
+              <div>
+                <div class="storage-plan">Standard Plan</div>
+                <div class="storage-sub-label">Cloud Storage</div>
+              </div>
+            </div>
+            <div class="storage-gb-pill">50 GB</div>
+          </div>
+          <div class="storage-bar-track"><div class="storage-bar-fill"></div></div>
+          <div class="storage-labels">
+            <span>19.0 GB used</span>
+            <span style="color:var(--text-d);">50 GB total</span>
+          </div>
+          <button class="manage-btn">Manage storage</button>
+        </div>
+        <div class="tools-section">
+          <div class="tools-title">Tools</div>
+          <div class="tool-item" style="border:1px solid rgba(37,99,235,.2);">
+            <div class="tool-icon" style="background:rgba(37,99,235,.12);">💾</div>
+            <div><div class="tool-title">Free up space</div><div class="tool-sub">Remove items already backed up</div></div>
+            <span style="color:var(--text-d);margin-left:auto;font-size:16px;">›</span>
+          </div>
+          <div class="tool-item" style="border:1px solid rgba(5,150,105,.2);">
+            <div class="tool-icon" style="background:rgba(5,150,105,.12);">🔒</div>
+            <div><div class="tool-title">Locked Folder</div><div class="tool-sub">Protect sensitive photos</div></div>
+            <span style="color:var(--text-d);margin-left:auto;font-size:16px;">›</span>
+          </div>
+          <div class="tool-item" style="border:1px solid rgba(217,119,6,.2);">
+            <div class="tool-icon" style="background:rgba(217,119,6,.12);">📦</div>
+            <div><div class="tool-title">Archive</div><div class="tool-sub">Hide photos from your grid</div></div>
+            <span style="color:var(--text-d);margin-left:auto;font-size:16px;">›</span>
+          </div>
+          <div class="tool-item" style="border:1px solid rgba(220,38,38,.2);">
+            <div class="tool-icon" style="background:rgba(220,38,38,.12);">🗑️</div>
+            <div><div class="tool-title">Bin</div><div class="tool-sub">Photos deleted after 60 days</div></div>
+            <span style="color:var(--text-d);margin-left:auto;font-size:16px;">›</span>
+          </div>
+        </div>
+        <div class="floating-nav" style="bottom:20px;">
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="nav-item active">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+            Utilities
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. PHOTO DETAIL ───────────── -->
+  <div class="phone">
+    <div class="phone-label">08 · Photo Detail</div>
+    <div class="frame" style="background:#000;">
+      <div class="screen detail-bg" style="background:radial-gradient(circle at center,#1D4ED8 0%,#080B1E 60%,#000 100%);">
+        <div class="detail-photo">🌅</div>
+        <!-- Ambient vignette -->
+        <div style="position:absolute;inset:0;background:radial-gradient(circle,transparent,rgba(0,0,0,.3));"></div>
+        <div class="detail-top">
+          <div class="glass-btn">‹</div>
+          <div class="glass-btn">⋮</div>
+        </div>
+        <div class="detail-bottom">
+          <!-- Info pill -->
+          <div class="info-pill">
+            <span>📅</span>
+            <span>Apr 12, 2024</span>
+            <span style="margin-left:10px;">📍</span>
+            <span>Paris, France</span>
+            <span style="margin-left:auto;color:var(--text-d);font-size:10px;">Camera</span>
+          </div>
+          <!-- Action pill -->
+          <div class="action-pill">
+            <div class="action-btn">
+              <div class="action-icon" style="background:rgba(0,229,204,.12);">📤</div>
+              <span class="action-label" style="color:var(--teal);">Share</span>
+            </div>
+            <div class="action-btn">
+              <div class="action-icon" style="background:rgba(239,68,68,.12);">❤️</div>
+              <span class="action-label" style="color:#EF4444;">Favourite</span>
+            </div>
+            <div class="action-btn">
+              <div class="action-icon" style="background:rgba(37,99,235,.12);">✏️</div>
+              <span class="action-label" style="color:var(--blue1);">Edit</span>
+            </div>
+            <div class="action-btn">
+              <div class="action-icon" style="background:rgba(239,68,68,.12);">🗑️</div>
+              <span class="action-label" style="color:#EF4444;">Delete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grid -->
+
+<div style="text-align:center;margin-top:48px;color:var(--text-d);font-size:12px;letter-spacing:1px;">
+  MIDNIGHT GALLERY · 8 SCREENS · FLUTTER APP PREVIEW
+</div>
+</body>
+</html>

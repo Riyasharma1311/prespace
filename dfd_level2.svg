@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="960" viewBox="0 0 1300 960">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#546E7A"/>
+    </marker>
+    <marker id="arr-start" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <polygon points="10 0, 0 3.5, 10 7" fill="#546E7A"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565C0"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#00000022"/>
+    </filter>
+  </defs>
+
+  <rect width="1300" height="960" fill="#F0F4F8"/>  <rect x="0" y="0" width="1300" height="60" fill="#1A237E" rx="0"/>  <text x="650" y="38" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="bold" fill="white">Google Photos Clone — Level 2 Data Flow Diagram</text>  <rect x="80" y="70" width="360" height="320" fill="rgba(0,105,92,0.05)" stroke="#00695C" stroke-width="1.5" stroke-dasharray="6,4" rx="10"/>  <text x="88" y="88" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#00695C">1.0  Browse Photos</text>  <rect x="520" y="70" width="360" height="320" fill="rgba(0,105,92,0.05)" stroke="#00695C" stroke-width="1.5" stroke-dasharray="6,4" rx="10"/>  <text x="528" y="88" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#00695C">2.0  Search Photos</text>  <rect x="80" y="490" width="360" height="270" fill="rgba(0,105,92,0.05)" stroke="#00695C" stroke-width="1.5" stroke-dasharray="6,4" rx="10"/>  <text x="88" y="508" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#00695C">3.0  Manage Library</text>  <rect x="520" y="490" width="360" height="270" fill="rgba(0,105,92,0.05)" stroke="#00695C" stroke-width="1.5" stroke-dasharray="6,4" rx="10"/>  <text x="528" y="508" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#00695C">4.0  Photo Detail</text>  <rect x="960" y="320" width="260" height="270" fill="rgba(0,105,92,0.05)" stroke="#00695C" stroke-width="1.5" stroke-dasharray="6,4" rx="10"/>  <text x="968" y="338" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#00695C">5.0  Utilities</text>  <rect x="30" y="120" width="110" height="60" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5" rx="4"/>
+  <rect x="34" y="124" width="102" height="52" fill="none" stroke="#1565C0" stroke-width="1" rx="3"/>
+  <text x="85.0" y="150.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1565C0">User</text>  <rect x="1120" y="120" width="140" height="60" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5" rx="4"/>
+  <rect x="1124" y="124" width="132" height="52" fill="none" stroke="#1565C0" stroke-width="1" rx="3"/>
+  <text x="1190.0" y="143.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1565C0">Camera /</text>
+  <text x="1190.0" y="157.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1565C0">Device</text>  <circle cx="180" cy="190" r="52" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+  <text x="180" y="173" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">1.1</text>
+  <text x="180" y="183" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Load</text>
+  <text x="180" y="196" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Photo Grid</text>  <circle cx="360" cy="190" r="52" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+  <text x="360" y="173" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">1.2</text>
+  <text x="360" y="183" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Display</text>
+  <text x="360" y="196" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Memories</text>  <circle cx="180" cy="330" r="52" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+  <text x="180" y="313" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">1.3</text>
+  <text x="180" y="323" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Group</text>
+  <text x="180" y="336" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">by Date</text>  <circle cx="360" cy="330" r="52" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+  <text x="360" y="313" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">1.4</text>
+  <text x="360" y="323" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Navigate to</text>
+  <text x="360" y="336" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Detail</text>  <circle cx="600" cy="190" r="52" fill="#E8EAF6" stroke="#3949AB" stroke-width="2.5"/>
+  <text x="600" y="173" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">2.1</text>
+  <text x="600" y="183" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Parse</text>
+  <text x="600" y="196" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Query</text>  <circle cx="780" cy="190" r="52" fill="#E8EAF6" stroke="#3949AB" stroke-width="2.5"/>
+  <text x="780" y="173" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">2.2</text>
+  <text x="780" y="183" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Filter</text>
+  <text x="780" y="196" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Photos</text>  <circle cx="600" cy="330" r="52" fill="#E8EAF6" stroke="#3949AB" stroke-width="2.5"/>
+  <text x="600" y="313" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">2.3</text>
+  <text x="600" y="323" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Display</text>
+  <text x="600" y="336" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Categories</text>  <circle cx="780" cy="330" r="52" fill="#E8EAF6" stroke="#3949AB" stroke-width="2.5"/>
+  <text x="780" y="313" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">2.4</text>
+  <text x="780" y="323" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Show</text>
+  <text x="780" y="336" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Results</text>  <circle cx="180" cy="560" r="52" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+  <text x="180" y="543" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">3.1</text>
+  <text x="180" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Load</text>
+  <text x="180" y="566" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Albums</text>  <circle cx="360" cy="560" r="52" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+  <text x="360" y="543" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">3.2</text>
+  <text x="360" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Display</text>
+  <text x="360" y="566" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Quick Access</text>  <circle cx="180" cy="700" r="52" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+  <text x="180" y="683" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">3.3</text>
+  <text x="180" y="693" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Open</text>
+  <text x="180" y="706" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Album View</text>  <circle cx="360" cy="700" r="52" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+  <text x="360" y="683" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">3.4</text>
+  <text x="360" y="693" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Count</text>
+  <text x="360" y="706" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Photos</text>  <circle cx="600" cy="560" r="52" fill="#FCE4EC" stroke="#C62828" stroke-width="2.5"/>
+  <text x="600" y="543" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">4.1</text>
+  <text x="600" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Load</text>
+  <text x="600" y="566" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Full Photo</text>  <circle cx="780" cy="560" r="52" fill="#FCE4EC" stroke="#C62828" stroke-width="2.5"/>
+  <text x="780" y="543" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">4.2</text>
+  <text x="780" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Show</text>
+  <text x="780" y="566" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Photo Info</text>  <circle cx="600" cy="700" r="52" fill="#FCE4EC" stroke="#C62828" stroke-width="2.5"/>
+  <text x="600" y="683" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">4.3</text>
+  <text x="600" y="693" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Handle</text>
+  <text x="600" y="706" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Actions</text>  <circle cx="780" cy="700" r="52" fill="#FCE4EC" stroke="#C62828" stroke-width="2.5"/>
+  <text x="780" y="683" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">4.4</text>
+  <text x="780" y="693" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Edit &amp;</text>
+  <text x="780" y="706" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Share</text>  <circle cx="1020" cy="380" r="52" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2.5"/>
+  <text x="1020" y="363" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">5.1</text>
+  <text x="1020" y="373" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Check</text>
+  <text x="1020" y="386" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Storage</text>  <circle cx="1150" cy="380" r="52" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2.5"/>
+  <text x="1150" y="363" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">5.2</text>
+  <text x="1150" y="373" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Free Up</text>
+  <text x="1150" y="386" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Space</text>  <circle cx="1020" cy="520" r="52" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2.5"/>
+  <text x="1020" y="503" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">5.3</text>
+  <text x="1020" y="513" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Manage</text>
+  <text x="1020" y="526" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Archive</text>  <circle cx="1150" cy="520" r="52" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2.5"/>
+  <text x="1150" y="503" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#004D40">5.4</text>
+  <text x="1150" y="513" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Locked</text>
+  <text x="1150" y="526" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#004D40">Folder</text>  <rect x="30" y="860" width="200" height="38" fill="#ECEFF1" stroke="#37474F" stroke-width="2" rx="2"/>
+  <line x1="70" y1="860" x2="70" y2="898" stroke="#37474F" stroke-width="1.5"/>
+  <text x="50" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#263238">D1</text>
+  <text x="150.0" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#263238">Photo Store</text>  <rect x="270" y="860" width="200" height="38" fill="#ECEFF1" stroke="#37474F" stroke-width="2" rx="2"/>
+  <line x1="310" y1="860" x2="310" y2="898" stroke="#37474F" stroke-width="1.5"/>
+  <text x="290" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#263238">D2</text>
+  <text x="390.0" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#263238">Album Store</text>  <rect x="510" y="860" width="220" height="38" fill="#ECEFF1" stroke="#37474F" stroke-width="2" rx="2"/>
+  <line x1="550" y1="860" x2="550" y2="898" stroke="#37474F" stroke-width="1.5"/>
+  <text x="530" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#263238">D3</text>
+  <text x="640.0" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#263238">Memories Store</text>  <rect x="990" y="860" width="200" height="38" fill="#ECEFF1" stroke="#37474F" stroke-width="2" rx="2"/>
+  <line x1="1030" y1="860" x2="1030" y2="898" stroke="#37474F" stroke-width="1.5"/>
+  <text x="1010" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#263238">D4</text>
+  <text x="1110.0" y="883.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#263238">User Prefs</text>  <rect x="20" y="915" width="12" height="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="2" rx="1"/>  <text x="38" y="926" font-family="Arial" font-size="10" fill="#555">External Entity</text>  <circle cx="165" cy="921" r="8" fill="#E0F2F1" stroke="#00695C" stroke-width="2"/>  <text x="179" y="926" font-family="Arial" font-size="10" fill="#555">Sub-Process</text>  <rect x="260" y="914" width="36" height="14" fill="#ECEFF1" stroke="#37474F" stroke-width="1.5" rx="1"/>  <line x1="288" y1="914" x2="288" y2="928" stroke="#37474F" stroke-width="1.5"/>  <text x="305" y="926" font-family="Arial" font-size="10" fill="#555">Data Store</text>  <line x1="390" y1="921" x2="420" y2="921" stroke="#546E7A" stroke-width="2" marker-end="url(#arr)"/>  <text x="435" y="926" font-family="Arial" font-size="10" fill="#555">Data Flow</text>  <line x1="140.0" y1="173.2" x2="132.1" y2="169.8" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="165.0" y="163.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Browse tap</text>  <line x1="140.0" y1="158.0" x2="308.5" y2="182.5" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="300.0" y="145.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Open memories</text>  <line x1="180.0" y1="242.0" x2="180.0" y2="278.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="180.0" y="266.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Raw photos</text>  <line x1="221.0" y1="221.9" x2="319.0" y2="298.1" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="290.0" y="263.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Photo tapped</text>  <line x1="232.0" y1="330.0" x2="308.0" y2="330.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="295.0" y="350.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Dated group</text>  <line x1="176.2" y1="241.9" x2="131.4" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="108.0" y="780.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Read photo list</text>  <line x1="378.4" y1="238.7" x2="612.8" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="390.0" y="790.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Fetch memories</text>  <line x1="140.0" y1="154.3" x2="548.2" y2="186.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="480.0" y="158.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Search query</text>  <line x1="652.0" y1="190.0" x2="728.0" y2="190.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="690.0" y="215.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Parsed query</text>  <line x1="780.0" y1="242.0" x2="780.0" y2="278.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="810.0" y="270.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Filtered photos</text>  <line x1="652.0" y1="330.0" x2="728.0" y2="330.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="720.0" y="360.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Category filter</text>  <line x1="744.3" y1="227.8" x2="147.9" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="510.0" y="790.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Search in store</text>  <line x1="92.0" y1="180.0" x2="168.3" y2="509.3" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="130.0" y="490.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Open Library</text>  <line x1="232.0" y1="560.0" x2="308.0" y2="560.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="270.0" y="585.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Albums list</text>  <line x1="319.0" y1="591.9" x2="221.0" y2="668.1" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="270.0" y="650.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Album tapped</text>  <line x1="308.0" y1="700.0" x2="232.0" y2="700.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="385.0" y="715.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Photo count</text>  <line x1="206.6" y1="604.7" x2="358.7" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="280.0" y="790.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Load albums</text>  <line x1="166.0" y1="750.1" x2="135.3" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="160.0" y="830.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Album photos</text>  <line x1="397.5" y1="366.0" x2="562.5" y2="524.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="490.0" y="445.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Photo ID</text>  <line x1="652.0" y1="560.0" x2="728.0" y2="560.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="690.0" y="585.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Full photo</text>  <line x1="600.0" y1="612.0" x2="600.0" y2="648.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="620.0" y="650.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Photo loaded</text>  <line x1="780.0" y1="612.0" x2="780.0" y2="648.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="820.0" y="655.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Share/Edit</text>  <line x1="557.0" y1="589.2" x2="158.0" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="600.0" y="820.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Fetch photo</text>  <line x1="739.2" y1="667.7" x2="122.9" y2="180.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="280.0" y="430.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Photo result</text>  <line x1="140.0" y1="163.5" x2="969.5" y2="367.6" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="880.0" y="310.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Check storage</text>  <line x1="1072.0" y1="380.0" x2="1098.0" y2="380.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="1120.0" y="415.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Usage data</text>  <line x1="1020.0" y1="432.0" x2="1020.0" y2="468.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="1020.0" y="460.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Archive list</text>  <line x1="1072.0" y1="520.0" x2="1098.0" y2="520.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" />
+  <text x="1120.0" y="545.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Unlock</text>  <line x1="1027.2" y1="431.5" x2="1087.3" y2="860.0" stroke="#546E7A" stroke-width="1.8" marker-end="url(#arr)" marker-start="url(#arr-start)"/>
+  <text x="1048.0" y="795.0" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" fill="#37474F" font-style="italic">Read prefs</text>
+</svg>

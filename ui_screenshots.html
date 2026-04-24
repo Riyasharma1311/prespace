@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Photos Clone – UI Screens</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  h1 {
+    color: white;
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: -20px;
+  }
+  .subtitle {
+    color: #888;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+  .screens-row {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .screen-label {
+    color: #aaa;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Phone Frame ── */
+  .phone {
+    width: 360px;
+    height: 780px;
+    background: white;
+    border-radius: 44px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 8px solid #1a1a1a;
+  }
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #1a1a1a;
+    border-radius: 0 0 18px 18px;
+    z-index: 100;
+  }
+  .status-bar {
+    height: 44px;
+    background: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 24px 6px;
+    font-size: 11px;
+    color: #202124;
+    font-weight: 600;
+    flex-shrink: 0;
+    z-index: 5;
+  }
+  .status-icons { display: flex; gap: 4px; align-items: center; }
+  .status-icons svg { width: 14px; height: 14px; }
+  .content { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* ── App Bar ── */
+  .app-bar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 16px;
+    background: white;
+    flex-shrink: 0;
+    border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  }
+  .app-bar-title { font-size: 22px; font-weight: 400; color: #202124; flex: 1; }
+  .app-bar-actions { display: flex; align-items: center; gap: 4px; }
+  .icon-btn {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; cursor: pointer;
+  }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #1A73E8;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 14px;
+    margin-right: 8px;
+  }
+
+  /* ── Scrollable body ── */
+  .scroll-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Memories ── */
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #202124;
+    padding: 12px 16px 8px;
+  }
+  .memories-row {
+    display: flex;
+    gap: 10px;
+    padding: 0 12px 8px;
+    overflow: hidden;
+  }
+  .memory-card {
+    width: 140px;
+    height: 190px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .memory-card .mc-icon {
+    font-size: 50px;
+    opacity: 0.25;
+  }
+  .memory-card .mc-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.65) 100%);
+  }
+  .memory-card .mc-play {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 26px; height: 26px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 14px;
+  }
+  .memory-card .mc-text {
+    position: absolute;
+    bottom: 10px; left: 10px; right: 10px;
+  }
+  .memory-card .mc-title {
+    color: white; font-size: 12px; font-weight: 600; line-height: 1.3;
+  }
+  .memory-card .mc-sub {
+    color: rgba(255,255,255,0.8); font-size: 10px; margin-top: 2px;
+  }
+
+  /* ── Photo Grid ── */
+  .date-label {
+    padding: 14px 16px 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #202124;
+  }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 0 2px;
+  }
+  .photo-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-cell .picon {
+    opacity: 0.4;
+    font-size: 20px;
+    color: white;
+  }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    height: 72px;
+    background: white;
+    border-top: 0.5px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  .nav-icon-wrap {
+    width: 56px; height: 28px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    transition: background .2s;
+  }
+  .nav-item.active .nav-icon-wrap {
+    background: rgba(26,115,232,0.12);
+  }
+  .nav-item span.nav-label {
+    font-size: 11px;
+    color: #5F6368;
+    font-weight: 400;
+  }
+  .nav-item.active span.nav-label {
+    color: #1A73E8;
+    font-weight: 500;
+  }
+  .nav-item.active .nav-icon-wrap svg path,
+  .nav-item.active .nav-icon-wrap svg rect { fill: #1A73E8; }
+
+  /* ── Search Screen ── */
+  .search-bar {
+    margin: 12px 16px;
+    height: 50px;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .search-bar .search-icon { font-size: 20px; color: #5F6368; }
+  .search-bar input {
+    flex: 1; border: none; outline: none;
+    font-size: 15px; color: #5F6368;
+    background: transparent;
+    font-family: inherit;
+  }
+
+  .browse-title {
+    font-size: 20px; font-weight: 500; color: #202124;
+    padding: 4px 16px 12px;
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 16px;
+  }
+  .cat-chip {
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .cat-chip .cat-icon { font-size: 22px; }
+  .cat-chip .cat-label { font-size: 13px; font-weight: 500; color: #202124; }
+
+  .recent-row {
+    display: flex; gap: 8px; padding: 14px 16px 4px; overflow: hidden;
+  }
+  .recent-thumb {
+    width: 86px; height: 86px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    opacity: 0.9;
+  }
+
+  /* ── Library Screen ── */
+  .quick-row {
+    display: flex; gap: 12px; padding: 12px 16px 0;
+  }
+  .quick-tile {
+    flex: 1;
+    background: #F8F9FA;
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quick-tile .qt-icon { font-size: 24px; }
+  .qt-info { flex: 1; }
+  .qt-info .qt-title { font-size: 13px; font-weight: 500; color: #202124; }
+  .qt-info .qt-count { font-size: 12px; color: #5F6368; }
+  .qt-chevron { color: #5F6368; font-size: 16px; }
+
+  .albums-header {
+    display: flex; align-items: center;
+    padding: 20px 16px 10px;
+  }
+  .albums-header span:first-child {
+    font-size: 18px; font-weight: 500; color: #202124; flex: 1;
+  }
+  .albums-header span:last-child { color: #1A73E8; font-size: 13px; font-weight: 500; }
+
+  .album-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 16px;
+  }
+  .album-card { cursor: pointer; }
+  .album-thumb {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+  .album-name { font-size: 13px; font-weight: 500; color: #202124; }
+  .album-count { font-size: 12px; color: #5F6368; }
+
+  /* ── Detail Screen ── */
+  .detail-full {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .detail-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .detail-top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    z-index: 10;
+  }
+  .detail-btn {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .detail-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    padding: 12px 16px 0;
+    z-index: 10;
+  }
+  .detail-location { display: flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.75); font-size: 12px; margin-bottom: 2px; }
+  .detail-date { color: rgba(255,255,255,0.7); font-size: 11px; margin-bottom: 12px; }
+  .detail-actions {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0,0,0,0.3);
+    padding: 10px 0;
+    margin: 0 -16px;
+  }
+  .det-action {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    cursor: pointer; padding: 4px 16px;
+  }
+  .det-action .da-icon { font-size: 24px; color: white; }
+  .det-action .da-label { font-size: 11px; color: white; }
+
+  /* ── Utilities Screen ── */
+  .storage-card {
+    margin: 16px;
+    background: linear-gradient(135deg, #1A73E8, #0D47A1);
+    border-radius: 18px;
+    padding: 20px;
+    color: white;
+  }
+  .storage-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .storage-header .s-icon { font-size: 20px; }
+  .storage-header .s-title { font-size: 15px; font-weight: 500; }
+  .progress-bar {
+    height: 6px; background: rgba(255,255,255,0.3);
+    border-radius: 3px; overflow: hidden; margin-bottom: 8px;
+  }
+  .progress-fill { height: 100%; background: white; border-radius: 3px; }
+  .storage-text { font-size: 12px; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+  .manage-btn {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 13px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .util-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .util-icon-wrap {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .util-info { flex: 1; }
+  .util-title { font-size: 14px; color: #202124; font-weight: 500; }
+  .util-sub { font-size: 12px; color: #5F6368; margin-top: 1px; }
+  .util-chevron { color: #5F6368; font-size: 18px; }
+
+</style>
+</head>
+<body>
+
+<h1>📸 Google Photos Clone – Flutter UI</h1>
+<p class="subtitle">4 Screens · Material Design 3 · Flutter / Dart</p>
+
+<div class="screens-row">
+
+  <!-- ══════════════════════════════ SCREEN 1: PHOTOS ══════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Photos · Home</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4 2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar -->
+      <div class="app-bar">
+        <span class="app-bar-title">Photos</span>
+        <div class="app-bar-actions">
+          <div class="icon-btn">🔍</div>
+          <div class="avatar">R</div>
+        </div>
+      </div>
+
+      <!-- Scrollable content -->
+      <div class="scroll-body" style="overflow-y:auto; flex:1;">
+        <!-- Memories -->
+        <div class="section-title">Memories</div>
+        <div class="memories-row">
+          <div class="memory-card" style="background: linear-gradient(160deg, #4285F4aa, #4285F4);">
+            <div class="mc-icon">🗼</div>
+            <div class="mc-overlay"></div>
+            <div class="mc-play">▶</div>
+            <div class="mc-text">
+              <div class="mc-title">3 Years Ago in Paris</div>
+              <div class="mc-sub">Jun 2022 · 24 photos</div>
+            </div>
+          </div>
+          <div class="memory-card" style="background: linear-gradient(160deg, #EA4335aa, #EA4335);">
+            <div class="mc-icon">☀️</div>
+            <div class="mc-overlay"></div>
+            <div class="mc-play">▶</div>
+            <div class="mc-text">
+              <div class="mc-title">Summer Highlights</div>
+              <div class="mc-sub">Aug 2023 · 18 photos</div>
+            </div>
+          </div>
+          <div class="memory-card" style="background: linear-gradient(160deg, #34A853aa, #34A853);">
+            <div class="mc-icon">👨‍👩‍👧</div>
+            <div class="mc-overlay"></div>
+            <div class="mc-play">▶</div>
+            <div class="mc-text">
+              <div class="mc-title">Family Weekend</div>
+              <div class="mc-sub">Dec 2023 · 31 photos</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today -->
+        <div class="date-label">Today</div>
+        <div class="photo-grid">
+          <div class="photo-cell" style="background:#4285F4cc;">🏔️</div>
+          <div class="photo-cell" style="background:#EA4335cc;">🐱</div>
+          <div class="photo-cell" style="background:#FBBC04cc;">😊</div>
+          <div class="photo-cell" style="background:#34A853cc;">🍕</div>
+          <div class="photo-cell" style="background:#9C27B0cc;">🚗</div>
+          <div class="photo-cell" style="background:#FF5722cc;">🎉</div>
+        </div>
+
+        <!-- Yesterday -->
+        <div class="date-label">Yesterday</div>
+        <div class="photo-grid">
+          <div class="photo-cell" style="background:#00BCD4cc;">🏖️</div>
+          <div class="photo-cell" style="background:#795548cc;">🥾</div>
+          <div class="photo-cell" style="background:#607D8B cc;">⚽</div>
+          <div class="photo-cell" style="background:#E91E63cc;">🎵</div>
+          <div class="photo-cell" style="background:#3F51B5cc;">🛍️</div>
+          <div class="photo-cell" style="background:#009688cc;">🏡</div>
+        </div>
+
+        <!-- 3 days ago -->
+        <div class="date-label">3 days ago</div>
+        <div class="photo-grid">
+          <div class="photo-cell" style="background:#FF9800cc;">✈️</div>
+          <div class="photo-cell" style="background:#8BC34Acc;">📷</div>
+          <div class="photo-cell" style="background:#673AB7cc;">❤️</div>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item active">
+          <div class="nav-icon-wrap">🖼️</div>
+          <span class="nav-label" style="color:#1A73E8;font-weight:500;">Photos</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🔍</div>
+          <span class="nav-label">Search</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">📚</div>
+          <span class="nav-label">Library</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">💡</div>
+          <span class="nav-label">Utilities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ SCREEN 2: SEARCH ══════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Search · Explore</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4 2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Search bar -->
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input placeholder="Search your photos" readonly>
+        <div class="avatar" style="width:28px;height:28px;font-size:12px;flex-shrink:0;">R</div>
+      </div>
+
+      <div class="scroll-body" style="overflow-y:auto;flex:1;">
+        <div class="browse-title">Browse</div>
+
+        <div class="cat-grid">
+          <div class="cat-chip" style="background:rgba(66,133,244,0.1);">
+            <span class="cat-icon">👤</span>
+            <span class="cat-label">People & Pets</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(52,168,83,0.1);">
+            <span class="cat-icon">📍</span>
+            <span class="cat-label">Places</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(234,67,53,0.1);">
+            <span class="cat-icon">🗂️</span>
+            <span class="cat-label">Things</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(251,188,4,0.1);">
+            <span class="cat-icon">🎥</span>
+            <span class="cat-label">Videos</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(156,39,176,0.1);">
+            <span class="cat-icon">🤳</span>
+            <span class="cat-label">Selfies</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(96,125,139,0.1);">
+            <span class="cat-icon">📱</span>
+            <span class="cat-label">Screenshots</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(233,30,99,0.1);">
+            <span class="cat-icon">❤️</span>
+            <span class="cat-label">Favourites</span>
+          </div>
+          <div class="cat-chip" style="background:rgba(0,188,212,0.1);">
+            <span class="cat-icon">📄</span>
+            <span class="cat-label">Documents</span>
+          </div>
+        </div>
+
+        <div style="padding:20px 16px 8px; font-size:16px; font-weight:500; color:#202124;">Recent searches</div>
+        <div class="recent-row">
+          <div class="recent-thumb" style="background:#4285F4cc;">🏔️</div>
+          <div class="recent-thumb" style="background:#EA4335cc;">🐱</div>
+          <div class="recent-thumb" style="background:#34A853cc;">🏖️</div>
+          <div class="recent-thumb" style="background:#FBBC04cc;">🎉</div>
+        </div>
+
+        <div style="padding:16px 16px 8px; font-size:16px; font-weight:500; color:#202124;">On This Day</div>
+        <div class="recent-row">
+          <div class="recent-thumb" style="background:#9C27B0cc; width:130px; height:86px; border-radius:12px;">🌴</div>
+          <div class="recent-thumb" style="background:#FF5722cc; width:130px; height:86px; border-radius:12px;">🎂</div>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🖼️</div>
+          <span class="nav-label">Photos</span>
+        </div>
+        <div class="nav-item active">
+          <div class="nav-icon-wrap">🔍</div>
+          <span class="nav-label" style="color:#1A73E8;font-weight:500;">Search</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">📚</div>
+          <span class="nav-label">Library</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">💡</div>
+          <span class="nav-label">Utilities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="screens-row">
+
+  <!-- ══════════════════════════════ SCREEN 3: LIBRARY ══════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Library · Albums</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4 2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <div class="app-bar">
+        <span class="app-bar-title">Library</span>
+        <div class="app-bar-actions">
+          <div class="avatar">R</div>
+        </div>
+      </div>
+
+      <div class="scroll-body" style="overflow-y:auto;flex:1;">
+        <!-- Quick access -->
+        <div class="quick-row">
+          <div class="quick-tile">
+            <span class="qt-icon">❤️</span>
+            <div class="qt-info">
+              <div class="qt-title">Favourites</div>
+              <div class="qt-count">24</div>
+            </div>
+            <span class="qt-chevron">›</span>
+          </div>
+          <div class="quick-tile">
+            <span class="qt-icon" style="color:#9e9e9e;">📦</span>
+            <div class="qt-info">
+              <div class="qt-title">Archive</div>
+              <div class="qt-count">12</div>
+            </div>
+            <span class="qt-chevron">›</span>
+          </div>
+        </div>
+
+        <div class="albums-header">
+          <span>Albums</span>
+          <span>View all</span>
+        </div>
+
+        <div class="album-grid">
+          <div class="album-card">
+            <div class="album-thumb" style="background:#4285F4cc;">⏱️</div>
+            <div class="album-name">Recents</div>
+            <div class="album-count">80 items</div>
+          </div>
+          <div class="album-card">
+            <div class="album-thumb" style="background:#EA4335cc;">❤️</div>
+            <div class="album-name">Favorites</div>
+            <div class="album-count">24 items</div>
+          </div>
+          <div class="album-card">
+            <div class="album-thumb" style="background:#34A853cc;">✈️</div>
+            <div class="album-name">Trips</div>
+            <div class="album-count">156 items</div>
+          </div>
+          <div class="album-card">
+            <div class="album-thumb" style="background:#FBBC04cc;">😊</div>
+            <div class="album-name">People & Pets</div>
+            <div class="album-count">67 items</div>
+          </div>
+          <div class="album-card">
+            <div class="album-thumb" style="background:#00BCD4cc;">🏔️</div>
+            <div class="album-name">Landscapes</div>
+            <div class="album-count">43 items</div>
+          </div>
+          <div class="album-card">
+            <div class="album-thumb" style="background:#FF5722cc;">🍕</div>
+            <div class="album-name">Food</div>
+            <div class="album-count">31 items</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🖼️</div>
+          <span class="nav-label">Photos</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🔍</div>
+          <span class="nav-label">Search</span>
+        </div>
+        <div class="nav-item active">
+          <div class="nav-icon-wrap">📚</div>
+          <span class="nav-label" style="color:#1A73E8;font-weight:500;">Library</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">💡</div>
+          <span class="nav-label">Utilities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ SCREEN 4: PHOTO DETAIL ══════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Photo Detail View</div>
+    <div class="phone" style="background:black;">
+      <div class="notch" style="background:#000;"></div>
+      <div class="status-bar" style="background:black; color:white;">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4 2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="white"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <!-- Full screen photo -->
+      <div class="detail-full">
+        <div class="detail-bg" style="background: linear-gradient(135deg, #4285F4cc, #0D47A1);">
+          <div style="font-size:90px; opacity:0.35;">🏔️</div>
+        </div>
+
+        <!-- Top bar -->
+        <div class="detail-top-bar">
+          <div class="detail-btn" style="font-size:22px;">←</div>
+          <div style="flex:1;"></div>
+          <div class="detail-btn">⋮</div>
+        </div>
+
+        <!-- Bottom info + actions -->
+        <div class="detail-bottom">
+          <div class="detail-location">📍 San Francisco, CA</div>
+          <div class="detail-date">Apr 9, 2026 · Taken with Camera</div>
+          <div class="detail-actions">
+            <div class="det-action">
+              <span class="da-icon">↗️</span>
+              <span class="da-label">Share</span>
+            </div>
+            <div class="det-action">
+              <span class="da-icon">🤍</span>
+              <span class="da-label">Favourite</span>
+            </div>
+            <div class="det-action">
+              <span class="da-icon">✏️</span>
+              <span class="da-label">Edit</span>
+            </div>
+            <div class="det-action">
+              <span class="da-icon">🗑️</span>
+              <span class="da-label">Delete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No bottom nav on detail screen -->
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ SCREEN 5: UTILITIES ══════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Utilities</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4 2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#202124"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+      </div>
+
+      <div class="app-bar">
+        <span class="app-bar-title">Utilities</span>
+        <div class="app-bar-actions">
+          <div class="avatar">R</div>
+        </div>
+      </div>
+
+      <div class="scroll-body" style="overflow-y:auto;flex:1;">
+        <!-- Storage card -->
+        <div class="storage-card">
+          <div class="storage-header">
+            <span class="s-icon">☁️</span>
+            <span class="s-title">Google One Storage</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:62%;"></div>
+          </div>
+          <div class="storage-text">9.3 GB of 15 GB used</div>
+          <div class="manage-btn">Manage storage</div>
+        </div>
+
+        <!-- Utility tiles -->
+        <div class="util-item">
+          <div class="util-icon-wrap" style="background:rgba(66,133,244,0.12);">🗑️</div>
+          <div class="util-info">
+            <div class="util-title">Free up space</div>
+            <div class="util-sub">Remove items already backed up</div>
+          </div>
+          <span class="util-chevron">›</span>
+        </div>
+        <div class="util-item">
+          <div class="util-icon-wrap" style="background:rgba(52,168,83,0.12);">🔒</div>
+          <div class="util-info">
+            <div class="util-title">Locked Folder</div>
+            <div class="util-sub">Protect sensitive photos</div>
+          </div>
+          <span class="util-chevron">›</span>
+        </div>
+        <div class="util-item">
+          <div class="util-icon-wrap" style="background:rgba(251,188,4,0.12);">📦</div>
+          <div class="util-info">
+            <div class="util-title">Archive</div>
+            <div class="util-sub">Hide photos from your grid</div>
+          </div>
+          <span class="util-chevron">›</span>
+        </div>
+        <div class="util-item">
+          <div class="util-icon-wrap" style="background:rgba(234,67,53,0.12);">🗑️</div>
+          <div class="util-info">
+            <div class="util-title">Bin</div>
+            <div class="util-sub">Photos deleted after 60 days</div>
+          </div>
+          <span class="util-chevron">›</span>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🖼️</div>
+          <span class="nav-label">Photos</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">🔍</div>
+          <span class="nav-label">Search</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon-wrap">📚</div>
+          <span class="nav-label">Library</span>
+        </div>
+        <div class="nav-item active">
+          <div class="nav-icon-wrap">💡</div>
+          <span class="nav-label" style="color:#1A73E8;font-weight:500;">Utilities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="color:#666;font-size:13px;text-align:center;padding-bottom:20px;">
+  Built with Flutter · Material Design 3 · Google Photos inspired UI
+</p>
+
+</body>
+</html>
